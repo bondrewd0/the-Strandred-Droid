@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level/leve2.tres" type="TileSet" id=2]
+[ext_resource path="res://Level/DeathZone.gd" type="Script" id=3]
+[ext_resource path="res://Level/LevelManager.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 674, 98.5 )
 
 [node name="Level1" type="Node2D"]
+position = Vector2( 2, 1 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_horizontal_guides_": [  ]
 }
@@ -18,5 +25,16 @@ tile_data = PoolIntArray( 0, 5, 0, 1, 5, 0, 2, 1, 0, 3, 1, 1, 4, 1, 1, 5, 1, 1, 
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 203, 209 )
+
+[node name="DeathZone" type="Area2D" parent="."]
+collision_layer = 8
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+position = Vector2( 1197, 476 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="DeathZone" to="DeathZone" method="_on_DeathZone_body_entered"]
+[connection signal="death" from="DeathZone" to="." method="_on_DeathZone_death"]
 
 [editable path="Player"]
