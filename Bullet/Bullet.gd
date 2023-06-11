@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-var direction= Vector2(0,0)
-var speed=1000
+var direction:int
+var speed=10
 var velocity= Vector2(0,0)
 var state:int
 var timer:float
@@ -9,15 +9,19 @@ signal dead
 
 func _ready():
 	state=1
-	timer=speed/(20000)
+	timer=speed/40
+	print(timer)
+	print(speed)
 	$Despawner.start(timer)
 	$AnimatedSprite.play("Active")
 
+
 func _process(delta):
-	velocity= delta*speed*direction
+	velocity.x= delta*speed*direction
 	if(speed >=0):
-		var col_info=move_and_collide(velocity.normalized())
-		speed-=500
+		var col_info=move_and_collide(velocity)
+		speed-=1
+	
 
 
 

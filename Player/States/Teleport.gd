@@ -13,14 +13,13 @@ onready var idle_state:BaseState= get_node(idle_node)
 onready var jump_state: BaseState=get_node(jump_node)
 func enter():
 	.enter()
-	player.velocity.x=0
 	player.block_movement=true
 
 func _process(delta):
 	if(chargin and can_shoot):
-		bullet_force+=5
-		if(bullet_force >=100):
-			bullet_force=100
+		bullet_force+=1
+		if(bullet_force >=20):
+			bullet_force=20
 	if(Input.is_action_just_pressed("trigger")and bullet_instance):
 		if(bullet_instance.state==1):
 			player.global_position=bullet_instance.global_position
@@ -47,10 +46,10 @@ func _unhandled_input(event):
 			bullet_instance.connect("dead",self,"delete_instance")
 			if(player.anim.is_flipped_h()):
 				bullet_instance.position=player.shootdir.global_position
-				bullet_instance.direction=Vector2(-1,0)
+				bullet_instance.direction=-1
 			if(!player.anim.is_flipped_h()):
 				bullet_instance.position=player.shootdir.global_position
-				bullet_instance.direction=Vector2(1,0)
+				bullet_instance.direction=1
 			bullet_instance.speed*=bullet_force
 			add_child(bullet_instance)
 			player.fire_timer.start(5)
