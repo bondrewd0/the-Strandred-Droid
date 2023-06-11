@@ -15,7 +15,7 @@ onready var move_state: BaseState=get_node(move_node)
 onready var jump_state: BaseState=get_node(jump_node)
 onready var fall_state: BaseState = get_node(fall_node)
 #  <   >
-func _process(delta):
+func _process(_delta):
 	if(!player.is_on_floor()):
 		return fall_state
 	var move=get_input()
@@ -38,7 +38,7 @@ func _process(delta):
 	return null
 
 
-func _input(event):
+func _input(_event):
 	if(Input.is_action_just_pressed("ui_up")):
 		return jump_state
 	if(Input.is_action_pressed("trigger")):

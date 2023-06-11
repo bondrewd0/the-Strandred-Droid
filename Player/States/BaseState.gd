@@ -19,10 +19,10 @@ func enter():
 func exit():
 	pass
 
-func _input(event):
+func _input(_event):
 	return null
 
-func _process(delta):
+func _process(_delta):
 	return null
 
 

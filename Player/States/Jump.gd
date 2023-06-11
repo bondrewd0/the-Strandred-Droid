@@ -1,6 +1,6 @@
 extends BaseState
-export (float)var jump_force=100
-export (float)var move_speed=60
+export (float)var jump_force=100.0
+export (float)var move_speed=60.0
 
 export (NodePath) var walk_node
 export (NodePath) var idle_node
@@ -14,7 +14,7 @@ func enter():
 	.enter()
 	player.velocity.y= -jump_force
 	
-func _process(delta):
+func _process(_delta):
 	var move=0
 	if(Input.is_action_pressed("ui_left")):
 		move=-1

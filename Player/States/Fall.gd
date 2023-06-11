@@ -1,6 +1,6 @@
 extends BaseState
 
-export (float)var move_speed=60
+export (float)var move_speed=60.0
 
 export (NodePath) var walk_node
 export (NodePath) var idle_node
@@ -8,7 +8,7 @@ export (NodePath) var idle_node
 onready var walk_state: BaseState = get_node(walk_node)
 onready var idle_state: BaseState = get_node(idle_node)
 
-func _process(delta):
+func _process(_delta):
 	var move=0
 	if(!player.block_movement):
 		if(Input.is_action_pressed("ui_left")):

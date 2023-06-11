@@ -15,7 +15,7 @@ func enter():
 	.enter()
 	player.block_movement=true
 
-func _process(delta):
+func _process(_delta):
 	if(chargin and can_shoot):
 		bullet_force+=1
 		if(bullet_force >=20):
@@ -35,7 +35,7 @@ func _process(delta):
 func delete_instance():
 	bullet_instance=null
 
-func _unhandled_input(event):
+func _unhandled_input(_event):
 	if(Input.is_action_pressed("trigger")and bullet_instance==null):
 		chargin=true
 	if(Input.is_action_just_released("trigger")and bullet_instance==null):
@@ -55,7 +55,7 @@ func _unhandled_input(event):
 			player.fire_timer.start(5)
 
 
-func _input(event):
+func _input(_event):
 	if(Input.is_action_just_pressed("ui_up")):
 		return jump_state
 	return null

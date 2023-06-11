@@ -15,7 +15,6 @@ func change_state(new_state:BaseState):
 		current_state.exit()
 	
 	current_state=new_state
-	print(current_state)
 	current_state.enter()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

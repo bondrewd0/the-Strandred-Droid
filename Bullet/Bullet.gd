@@ -10,8 +10,6 @@ signal dead
 func _ready():
 	state=1
 	timer=speed/40
-	print(timer)
-	print(speed)
 	$Despawner.start(timer)
 	$AnimatedSprite.play("Active")
 
@@ -19,7 +17,7 @@ func _ready():
 func _process(delta):
 	velocity.x= delta*speed*direction
 	if(speed >=0):
-		var col_info=move_and_collide(velocity)
+		move_and_collide(velocity)
 		speed-=1
 	
 
