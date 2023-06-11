@@ -1,0 +1,130 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Player/States/IdleState.gd" type="Script" id=1]
+[ext_resource path="res://Player/States/Jump.gd" type="Script" id=2]
+[ext_resource path="res://Player/PlayerControler.gd" type="Script" id=3]
+[ext_resource path="res://Player/States/StateManager.gd" type="Script" id=4]
+[ext_resource path="res://Player/States/Teleport.gd" type="Script" id=5]
+[ext_resource path="res://Player/Boceto1.png" type="Texture" id=6]
+[ext_resource path="res://Player/States/Walk.gd" type="Script" id=7]
+[ext_resource path="res://Player/States/Fall.gd" type="Script" id=8]
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 11.0
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 256, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 320, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 6.0
+} ]
+
+[node name="Player" type="Node2D"]
+position = Vector2( 172, 121 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+collision_mask = 4
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 1, 6 )
+shape = SubResource( 9 )
+
+[node name="State_Manager" type="Node" parent="KinematicBody2D"]
+script = ExtResource( 4 )
+start_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="KinematicBody2D/State_Manager"]
+script = ExtResource( 1 )
+anim_name = "Idle"
+move_node = NodePath("../Walk")
+shoot_node = NodePath("../Shoot")
+jump_node = NodePath("../Jump")
+fall_node = NodePath("../Fall")
+
+[node name="Shoot" type="Node" parent="KinematicBody2D/State_Manager"]
+script = ExtResource( 5 )
+anim_name = "Idle"
+move_node = NodePath("../Walk")
+idle_node = NodePath("../Idle")
+jump_node = NodePath("../Jump")
+
+[node name="Walk" type="Node" parent="KinematicBody2D/State_Manager"]
+script = ExtResource( 7 )
+anim_name = "Idle"
+move_speed = 30
+idle_node = NodePath("../Idle")
+shoot_node = NodePath("../Shoot")
+move_node = NodePath(".")
+jump_node = NodePath("../Jump")
+fall_node = NodePath("../Fall")
+
+[node name="Jump" type="Node" parent="KinematicBody2D/State_Manager"]
+script = ExtResource( 2 )
+jump_force = 200.0
+move_speed = 30.0
+walk_node = NodePath("../Walk")
+idle_node = NodePath("../Idle")
+fall_node = NodePath("../Fall")
+
+[node name="Fall" type="Node" parent="KinematicBody2D/State_Manager"]
+script = ExtResource( 8 )
+move_speed = 30.0
+walk_node = NodePath("../Walk")
+idle_node = NodePath("../Idle")
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
+position = Vector2( -1, 0 )
+frames = SubResource( 5 )
+animation = "Idle"
+speed_scale = 0.9
+
+[node name="Position2D" type="Position2D" parent="KinematicBody2D"]
+visible = false
+position = Vector2( 20, 0 )
+
+[node name="FireCooldown" type="Timer" parent="KinematicBody2D"]
+
+[node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 2110
+limit_bottom = 600
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[connection signal="timeout" from="KinematicBody2D/FireCooldown" to="KinematicBody2D/State_Manager/Shoot" method="_on_FireCooldown_timeout"]
