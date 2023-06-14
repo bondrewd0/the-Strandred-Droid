@@ -5,6 +5,7 @@ var speed=10
 var velocity= Vector2(0,0)
 var state:int
 var timer:float
+var enemy_hit= preload("res://Enemy.tscn")
 signal dead
 
 func _ready():
@@ -12,6 +13,7 @@ func _ready():
 	timer=speed/40
 	$Despawner.start(timer)
 	$AnimatedSprite.play("Active")
+
 
 
 func _process(delta):
@@ -33,3 +35,10 @@ func _on_Despawner_timeout():
 
 func _on_Area2D_body_entered(body):
 	print(body)
+
+
+func _on_Area2D_area_entered(area):
+	connect("tagged",self,"_Hit")
+
+func _Hit(tagged_enemy):
+	print(1)

@@ -10,3 +10,4 @@ func _on_DeathZone_death():
 
 func _on_Area2D_body_entered(_body):
 	print(1)
+
