@@ -5,7 +5,7 @@ export (float)var move_speed=60.0
 export (NodePath) var walk_node
 export (NodePath) var idle_node
 export (NodePath) var fall_node
-
+export var anim_name2:String
 onready var walk_state: BaseState = get_node(walk_node)
 onready var idle_state: BaseState = get_node(idle_node)
 onready var fall_state: BaseState = get_node(fall_node)
@@ -16,6 +16,7 @@ func enter():
 	
 func _process(_delta):
 	var move=0
+	
 	if(Input.is_action_pressed("ui_left")):
 		move=-1
 		player.anim.flip_h=true
@@ -33,5 +34,5 @@ func _process(_delta):
 		if move!=0:
 			return walk_state
 		return idle_state
-	
+	player.anim.play(anim_name2)
 	return null

@@ -54,4 +54,4 @@ text = "Quit"
 script = ExtResource( 3 )
 
 [connection signal="pressed" from="ColorRect/ReplayButton" to="ColorRect/ReplayButton" method="_on_ReplayButton_pressed"]
-[connection signal="pressed" from="ColorRect/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="ColorRect/QuitButton" to="ColorRect/QuitButton" method="_on_QuitButton_pressed"]

@@ -9,7 +9,7 @@ onready var state= $State_Manager
 onready var shootdir=$Position2D
 onready var fire_timer=$FireCooldown
 var velocity= Vector2.ZERO
-var gravity=2
+export var gravity:float
 var block_movement:bool=false
 # Called when the node enters the scene tree for the first time.
 func _ready():

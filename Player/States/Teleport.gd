@@ -4,6 +4,7 @@ var chargin:bool
 var can_shoot:bool=true
 var bullet_force:int=0
 
+export var anim_name2:String
 export (NodePath) var move_node
 export (NodePath) var idle_node
 export (NodePath) var jump_node
@@ -40,6 +41,8 @@ func _unhandled_input(_event):
 		chargin=true
 	if(Input.is_action_just_released("trigger")and bullet_instance==null):
 		if(can_shoot):
+			player.anim.stop()
+			player.anim.play(anim_name2)
 			chargin=false
 			can_shoot=false
 			bullet_instance=bullet.instance()
