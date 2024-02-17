@@ -14,7 +14,7 @@ func _ready():
 	pass # Replace with function body.
 
 func enter():
-	player.anim.play(anim_name)
+	player.anim.travel(anim_name)
 
 func exit():
 	pass

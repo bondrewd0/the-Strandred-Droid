@@ -1,5 +1,5 @@
 extends Node
-
+class_name State_Manager
 var current_state: BaseState
 
 export(NodePath) var start_state 
@@ -18,6 +18,7 @@ func change_state(new_state:BaseState):
 	current_state.enter()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
 	var new_state= current_state._process(delta)
 	if new_state:
 		change_state(new_state)

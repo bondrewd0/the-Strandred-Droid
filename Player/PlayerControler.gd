@@ -4,10 +4,11 @@ class_name Player
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-onready var anim= $AnimatedSprite
-onready var state= $State_Manager
+onready var anim= $AnimationTree.get('parameters/playback')
+onready var state= $StateDebugLabel/State_Manager
 onready var shootdir=$Position2D
 onready var fire_timer=$FireCooldown
+onready var player_sprt=$Sprite
 var velocity= Vector2.ZERO
 export var gravity:float
 var block_movement:bool=false

@@ -4,10 +4,14 @@ var chargin:bool
 var can_shoot:bool=true
 var bullet_force:int=0
 
+export var anim_name2:String
+export (NodePath) var move_node
 export (NodePath) var idle_node
+export (NodePath) var jump_node
 
+onready var move_state: BaseState=get_node(move_node)
 onready var idle_state:BaseState= get_node(idle_node)
-
+onready var jump_state: BaseState=get_node(jump_node)
 func enter():
 	.enter()
 	player.block_movement=true

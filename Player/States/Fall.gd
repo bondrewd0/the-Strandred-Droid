@@ -2,7 +2,6 @@ extends BaseState
 
 export (float)var move_speed=60.0
 export var anim_name2:String
-export var anim_name3:String
 export (NodePath) var walk_node
 export (NodePath) var idle_node
 
@@ -12,12 +11,12 @@ onready var idle_state: BaseState = get_node(idle_node)
 func _process(_delta):
 	var move=0
 	if(!player.block_movement):
-		if(Input.is_action_pressed("ui_left")):
+		if(Input.is_action_pressed("Left")):
 			move=-1
-			player.anim.flip_h=true
-		elif(Input.is_action_pressed("ui_right")):
+			player.player_sprt.flip_h=true
+		elif(Input.is_action_pressed("Right")):
 			move=1
-			player.anim.flip_h=false
+			player.player_sprt.flip_h=false
 	
 	player.velocity.y+=player.gravity
 	player.velocity.x= move*move_speed
@@ -30,9 +29,7 @@ func _process(_delta):
 			return walk_state
 		else:
 			return idle_state
-	if(!player.is_on_floor()):
-		player.anim.play(anim_name2)
 	return null
 
 func exit():
-	player.anim.play(anim_name3)
+	player.anim.travel(anim_name2)
