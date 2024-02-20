@@ -4,17 +4,15 @@ extends BaseState
 export var move_speed=60
 
 export (NodePath) var idle_node
-export (NodePath) var shoot_node
-export (NodePath) var move_node
+export (NodePath) var charge_node
 export (NodePath) var jump_node
 export (NodePath) var fall_node
 
 onready var idle_state:BaseState= get_node(idle_node)
-onready var shooting:BaseState= get_node(shoot_node)
-onready var move_state: BaseState=get_node(move_node)
+onready var charging_state:BaseState= get_node(charge_node)
 onready var jump_state: BaseState=get_node(jump_node)
 onready var fall_state: BaseState = get_node(fall_node)
-#  <   >
+
 func _process(_delta):
 	if(!player.is_on_floor()):
 		return fall_state
@@ -42,5 +40,5 @@ func _input(_event):
 	if(Input.is_action_just_pressed("Jump")):
 		return jump_state
 	if(Input.is_action_pressed("trigger")):
-		return shooting
+		return charging_state
 	return null

@@ -27,9 +27,9 @@ func _process(_delta):
 
 
 func get_input():
-	if(Input.is_action_pressed("ui_left")):
+	if(Input.is_action_pressed("Left")):
 		return -1
-	elif(Input.is_action_pressed("ui_right")):
+	elif(Input.is_action_pressed("Right")):
 		return 1
 	
 	return 0
