@@ -12,6 +12,7 @@ export (NodePath) var jump_node
 onready var move_state: BaseState=get_node(move_node)
 onready var idle_state:BaseState= get_node(idle_node)
 onready var jump_state: BaseState=get_node(jump_node)
+
 func enter():
 	.enter()
 	player.block_movement=true
@@ -41,7 +42,6 @@ func _unhandled_input(_event):
 		chargin=true
 	if(Input.is_action_just_released("trigger")and bullet_instance==null):
 		if(can_shoot):
-
 			player.anim.travel(anim_name2)
 			chargin=false
 			can_shoot=false
@@ -69,5 +69,4 @@ func _on_FireCooldown_timeout():
 	player.fire_timer.stop()
 
 func exit():
-	.exit()
 	player.block_movement=false

@@ -1,7 +1,6 @@
 extends BaseState
 
 export (float)var move_speed=60.0
-export var anim_name2:String
 export (NodePath) var walk_node
 export (NodePath) var idle_node
 
@@ -31,5 +30,3 @@ func _process(_delta):
 			return idle_state
 	return null
 
-func exit():
-	player.anim.travel(anim_name2)

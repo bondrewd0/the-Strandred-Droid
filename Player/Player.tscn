@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://Player/States/IdleState.gd" type="Script" id=1]
 [ext_resource path="res://Player/States/Jump.gd" type="Script" id=2]
@@ -28,8 +28,24 @@ tracks/0/keys = {
 "values": [ 60, 61, 62, 63, 64, 65, 66, 67, 68, 69 ]
 }
 
+[sub_resource type="Animation" id=45]
+resource_name = "Fall"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.5, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 50, 51, 52, 63, 64 ]
+}
+
 [sub_resource type="Animation" id=11]
 resource_name = "Idle"
+length = 0.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -38,15 +54,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.7 ),
+"times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
+"update": 1,
 "values": [ 0, 1, 0 ]
 }
 
 [sub_resource type="Animation" id=13]
 resource_name = "JumpStart"
-length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -94,6 +109,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=17]
 resource_name = "Shoot"
+length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -101,10 +117,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 21, 22, 23, 24, 25, 26, 27 ]
+"values": [ 22, 23, 24, 25, 26, 27 ]
 }
 
 [sub_resource type="Animation" id=18]
@@ -126,6 +142,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationNodeAnimation" id=19]
 animation = "Death"
+
+[sub_resource type="AnimationNodeAnimation" id=46]
+animation = "Fall"
 
 [sub_resource type="AnimationNodeAnimation" id=20]
 animation = "Idle"
@@ -151,34 +170,45 @@ animation = "Walk"
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=31]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=32]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=48]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=49]
 
 [sub_resource type="AnimationNodeStateMachine" id=37]
 states/Death/node = SubResource( 19 )
 states/Death/position = Vector2( 369.803, 45 )
+states/Fall/node = SubResource( 46 )
+states/Fall/position = Vector2( -57.579, 191 )
 states/Idle/node = SubResource( 20 )
-states/Idle/position = Vector2( 162, 45 )
+states/Idle/position = Vector2( 167, 45 )
 states/JumpStart/node = SubResource( 22 )
-states/JumpStart/position = Vector2( 146, 179 )
+states/JumpStart/position = Vector2( 162, 191 )
 states/LoadShoot/node = SubResource( 24 )
 states/LoadShoot/position = Vector2( -31, -68 )
 states/Shoot/node = SubResource( 25 )
 states/Shoot/position = Vector2( 162, -68 )
 states/Walk/node = SubResource( 26 )
 states/Walk/position = Vector2( -21, 45 )
-transitions = [ "Idle", "Walk", SubResource( 27 ), "Walk", "Idle", SubResource( 28 ), "Idle", "Death", SubResource( 29 ), "Idle", "LoadShoot", SubResource( 30 ), "LoadShoot", "Shoot", SubResource( 31 ), "Idle", "JumpStart", SubResource( 33 ), "Shoot", "Idle", SubResource( 32 ), "JumpStart", "Walk", SubResource( 40 ), "JumpStart", "Idle", SubResource( 41 ) ]
+transitions = [ "Idle", "Walk", SubResource( 27 ), "Walk", "Idle", SubResource( 28 ), "Idle", "Death", SubResource( 29 ), "Idle", "LoadShoot", SubResource( 30 ), "LoadShoot", "Shoot", SubResource( 31 ), "Idle", "JumpStart", SubResource( 33 ), "Shoot", "Idle", SubResource( 32 ), "Walk", "LoadShoot", SubResource( 42 ), "Walk", "JumpStart", SubResource( 43 ), "Shoot", "Walk", SubResource( 44 ), "JumpStart", "Fall", SubResource( 47 ), "Fall", "Walk", SubResource( 48 ), "Fall", "Idle", SubResource( 49 ) ]
 start_node = "Idle"
 end_node = "Death"
-graph_offset = Vector2( -450.579, -103.332 )
+graph_offset = Vector2( -450.579, 18.02 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=38]
 
@@ -195,7 +225,7 @@ position = Vector2( 30.322, 1.7 )
 shape = SubResource( 39 )
 
 [node name="Position2D" type="Position2D" parent="KinematicBody2D"]
-position = Vector2( 50.75, -4.87495 )
+position = Vector2( 63, 4 )
 
 [node name="FireCooldown" type="Timer" parent="KinematicBody2D"]
 
@@ -213,6 +243,7 @@ editor_draw_drag_margin = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D"]
 anims/Death = SubResource( 10 )
+anims/Fall = SubResource( 45 )
 anims/Idle = SubResource( 11 )
 anims/JumpStart = SubResource( 13 )
 anims/LoadShoot = SubResource( 15 )
@@ -223,10 +254,11 @@ anims/Walk = SubResource( 18 )
 [node name="AnimationTree" type="AnimationTree" parent="KinematicBody2D"]
 tree_root = SubResource( 37 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 38 )
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
-position = Vector2( 41, 1 )
+position = Vector2( 32, 0 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 hframes = 10
@@ -272,16 +304,15 @@ fall_node = NodePath("../Fall")
 [node name="Jump" type="Node" parent="KinematicBody2D/StateDebugLabel/State_Manager"]
 script = ExtResource( 2 )
 anim_name = "JumpStart"
-jump_force = 150.0
+jump_force = 200.0
 move_speed = 30.0
 fall_node = NodePath("../Fall")
 charge_node = NodePath("../Shoot")
 
 [node name="Fall" type="Node" parent="KinematicBody2D/StateDebugLabel/State_Manager"]
 script = ExtResource( 8 )
-anim_name = "IniFall"
+anim_name = "Fall"
 move_speed = 30.0
-anim_name2 = "Land"
 walk_node = NodePath("../Walk")
 idle_node = NodePath("../Idle")
 
