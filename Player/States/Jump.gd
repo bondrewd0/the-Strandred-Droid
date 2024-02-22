@@ -30,7 +30,3 @@ func _process(_delta):
 	if(player.velocity.y>0):
 		return fall_state
 	return null
-
-func _input(event):
-	if(Input.is_action_pressed("trigger")):
-		return charging_state

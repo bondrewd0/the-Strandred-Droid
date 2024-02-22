@@ -228,6 +228,7 @@ shape = SubResource( 39 )
 position = Vector2( 63, 4 )
 
 [node name="FireCooldown" type="Timer" parent="KinematicBody2D"]
+one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
 current = true

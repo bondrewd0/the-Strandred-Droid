@@ -11,7 +11,7 @@ onready var state= $State_Manager
 func _ready():
 	pass # Replace with function body.
 
-func _process(delta):
+func _process(_delta):
 	if(!state.current_state):
 		pass
 	else:
