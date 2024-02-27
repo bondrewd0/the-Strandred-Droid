@@ -12,6 +12,8 @@ onready var player_sprt=$Sprite
 var velocity= Vector2.ZERO
 export var gravity:float
 var block_movement:bool=false
+var tagged_enemy:bool=false
+signal tp(pos)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	state.init(self)

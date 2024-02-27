@@ -27,7 +27,7 @@ func _process(_delta):
 		if(Input.is_action_just_released("trigger")and bullet_instance==null):
 			fire()
 	if(Input.is_action_just_pressed("trigger")and bullet_instance):
-		if(bullet_instance.state==1):
+		if(bullet_instance.state!=0):
 			teleport()
 	if(!chargin):
 		if(get_input()!=0):
@@ -47,7 +47,7 @@ func _input(_event):
 func _on_FireCooldown_timeout():
 	bullet_force=0
 	can_shoot=true
-	print(1)
+
 
 func exit():
 	player.block_movement=false
@@ -63,6 +63,7 @@ func fire():
 	can_shoot=false
 	bullet_instance=bullet.instance()
 	bullet_instance.connect("dead",self,"delete_instance")
+	bullet_instance.connect("tagged",self,"set_tagged")
 	if(player.player_sprt.is_flipped_h()):
 		bullet_instance.position=player.shootdir.global_position
 		bullet_instance.direction=-1
@@ -74,7 +75,12 @@ func fire():
 	player.fire_timer.start(5)
 
 func teleport():
+	player.emit_signal("tp",player.global_position)
 	player.global_position=bullet_instance.global_position
 	bullet_instance.queue_free()
 	bullet_instance=null
 	player.fire_timer.start(2)
+
+func set_tagged():
+	player.tagged_enemy=!player.tagged_enemy
+	print(player.tagged_enemy)

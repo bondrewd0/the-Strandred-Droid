@@ -212,24 +212,21 @@ graph_offset = Vector2( -450.579, 18.02 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=38]
 
-[node name="Player" type="Node2D"]
-position = Vector2( 172, 121 )
-
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="Player" type="KinematicBody2D"]
 collision_mask = 28
 script = ExtResource( 3 )
 gravity = 1.5
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 39 )
 
-[node name="Position2D" type="Position2D" parent="KinematicBody2D"]
+[node name="Position2D" type="Position2D" parent="."]
 position = Vector2( 10, 0 )
 
-[node name="FireCooldown" type="Timer" parent="KinematicBody2D"]
+[node name="FireCooldown" type="Timer" parent="."]
 one_shot = true
 
-[node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
+[node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.6, 0.6 )
 limit_left = 0
@@ -243,7 +240,7 @@ drag_margin_right = 0.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Death = SubResource( 10 )
 anims/Fall = SubResource( 45 )
 anims/Idle = SubResource( 11 )
@@ -253,20 +250,20 @@ anims/RESET = SubResource( 16 )
 anims/Shoot = SubResource( 17 )
 anims/Walk = SubResource( 18 )
 
-[node name="AnimationTree" type="AnimationTree" parent="KinematicBody2D"]
+[node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 37 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 38 )
 
-[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
+[node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 hframes = 10
 vframes = 8
 frame = 16
 
-[node name="StateDebugLabel" type="Label" parent="KinematicBody2D"]
+[node name="StateDebugLabel" type="Label" parent="."]
 margin_left = -19.0
 margin_top = -32.0
 margin_right = 21.0
@@ -274,18 +271,18 @@ margin_bottom = -18.0
 text = "State: "
 script = ExtResource( 9 )
 
-[node name="State_Manager" type="Node" parent="KinematicBody2D/StateDebugLabel"]
+[node name="State_Manager" type="Node" parent="StateDebugLabel"]
 script = ExtResource( 4 )
 start_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="KinematicBody2D/StateDebugLabel/State_Manager"]
+[node name="Idle" type="Node" parent="StateDebugLabel/State_Manager"]
 script = ExtResource( 1 )
 anim_name = "Idle"
 move_node = NodePath("../Walk")
 charge_node = NodePath("../Shoot")
 jump_node = NodePath("../Jump")
 
-[node name="Shoot" type="Node" parent="KinematicBody2D/StateDebugLabel/State_Manager"]
+[node name="Shoot" type="Node" parent="StateDebugLabel/State_Manager"]
 script = ExtResource( 5 )
 anim_name = "LoadShoot"
 anim_name2 = "Shoot"
@@ -293,28 +290,28 @@ move_node = NodePath("../Walk")
 idle_node = NodePath("../Idle")
 jump_node = NodePath("../Jump")
 
-[node name="Walk" type="Node" parent="KinematicBody2D/StateDebugLabel/State_Manager"]
+[node name="Walk" type="Node" parent="StateDebugLabel/State_Manager"]
 script = ExtResource( 7 )
 anim_name = "Walk"
-move_speed = 30
+move_speed = 50
 idle_node = NodePath("../Idle")
 charge_node = NodePath("../Shoot")
 jump_node = NodePath("../Jump")
 fall_node = NodePath("../Fall")
 
-[node name="Jump" type="Node" parent="KinematicBody2D/StateDebugLabel/State_Manager"]
+[node name="Jump" type="Node" parent="StateDebugLabel/State_Manager"]
 script = ExtResource( 2 )
 anim_name = "JumpStart"
-jump_force = 150.0
-move_speed = 30.0
+jump_force = 200.0
+move_speed = 50.0
 fall_node = NodePath("../Fall")
 charge_node = NodePath("../Shoot")
 
-[node name="Fall" type="Node" parent="KinematicBody2D/StateDebugLabel/State_Manager"]
+[node name="Fall" type="Node" parent="StateDebugLabel/State_Manager"]
 script = ExtResource( 8 )
 anim_name = "Fall"
 move_speed = 30.0
 walk_node = NodePath("../Walk")
 idle_node = NodePath("../Idle")
 
-[connection signal="timeout" from="KinematicBody2D/FireCooldown" to="KinematicBody2D/StateDebugLabel/State_Manager/Shoot" method="_on_FireCooldown_timeout"]
+[connection signal="timeout" from="FireCooldown" to="StateDebugLabel/State_Manager/Shoot" method="_on_FireCooldown_timeout"]
