@@ -221,24 +221,25 @@ script = ExtResource( 3 )
 gravity = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( 30.322, 1.7 )
 shape = SubResource( 39 )
 
 [node name="Position2D" type="Position2D" parent="KinematicBody2D"]
-position = Vector2( 63, 4 )
+position = Vector2( 10, 0 )
 
 [node name="FireCooldown" type="Timer" parent="KinematicBody2D"]
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="KinematicBody2D"]
 current = true
-zoom = Vector2( 0.4, 0.4 )
+zoom = Vector2( 0.6, 0.6 )
 limit_left = 0
 limit_top = 0
 limit_right = 2110
 limit_bottom = 600
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
+drag_margin_left = 0.31
+drag_margin_right = 0.0
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
@@ -259,7 +260,6 @@ active = true
 parameters/playback = SubResource( 38 )
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
-position = Vector2( 32, 0 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
 hframes = 10
@@ -267,10 +267,10 @@ vframes = 8
 frame = 16
 
 [node name="StateDebugLabel" type="Label" parent="KinematicBody2D"]
-margin_left = 12.75
-margin_top = -41.875
-margin_right = 52.75
-margin_bottom = -27.875
+margin_left = -19.0
+margin_top = -32.0
+margin_right = 21.0
+margin_bottom = -18.0
 text = "State: "
 script = ExtResource( 9 )
 
@@ -305,7 +305,7 @@ fall_node = NodePath("../Fall")
 [node name="Jump" type="Node" parent="KinematicBody2D/StateDebugLabel/State_Manager"]
 script = ExtResource( 2 )
 anim_name = "JumpStart"
-jump_force = 200.0
+jump_force = 150.0
 move_speed = 30.0
 fall_node = NodePath("../Fall")
 charge_node = NodePath("../Shoot")

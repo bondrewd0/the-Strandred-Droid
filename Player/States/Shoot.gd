@@ -17,23 +17,20 @@ func enter():
 	if can_shoot:
 		.enter()
 		player.block_movement=true
+	pass
 
 func _process(_delta):
 	if can_shoot:
 		if Input.is_action_pressed("trigger"):
 			chargin=true
 			charge_Up()
-	if(Input.is_action_just_released("trigger")and bullet_instance==null):
-		fire()
-		
+		if(Input.is_action_just_released("trigger")and bullet_instance==null):
+			fire()
 	if(Input.is_action_just_pressed("trigger")and bullet_instance):
 		if(bullet_instance.state==1):
-			player.global_position=bullet_instance.global_position
-			bullet_instance.queue_free()
-			bullet_instance=null
-			player.fire_timer.start(2)
+			teleport()
 	if(!chargin):
-		if(Input.is_action_pressed("Right") or Input.is_action_pressed("Left")):
+		if(get_input()!=0):
 			return move_state
 		else:
 			return idle_state
@@ -41,25 +38,6 @@ func _process(_delta):
 
 func delete_instance():
 	bullet_instance=null
-
-func _unhandled_input(_event):
-	if(Input.is_action_just_released("trigger")and bullet_instance==null):
-		if(can_shoot):
-			player.anim.travel(anim_name2)
-			chargin=false
-			can_shoot=false
-			bullet_instance=bullet.instance()
-			bullet_instance.connect("dead",self,"delete_instance")
-			if(player.player_sprt.is_flipped_h()):
-				bullet_instance.position=player.shootdir.global_position
-				bullet_instance.direction=-1
-			if(!player.player_sprt.is_flipped_h()):
-				bullet_instance.position=player.shootdir.global_position
-				bullet_instance.direction=1
-			bullet_instance.speed*=bullet_force
-			add_child(bullet_instance)
-			player.fire_timer.start(5)
-
 
 func _input(_event):
 	if(Input.is_action_just_pressed("Jump")):
@@ -94,3 +72,9 @@ func fire():
 	bullet_instance.speed*=bullet_force
 	add_child(bullet_instance)
 	player.fire_timer.start(5)
+
+func teleport():
+	player.global_position=bullet_instance.global_position
+	bullet_instance.queue_free()
+	bullet_instance=null
+	player.fire_timer.start(2)
