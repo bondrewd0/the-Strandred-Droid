@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Level/leve2.tres" type="TileSet" id=2]
 [ext_resource path="res://Level/DeathZone.gd" type="Script" id=3]
 [ext_resource path="res://Level/LevelManager.gd" type="Script" id=4]
 [ext_resource path="res://Level/EndDoor.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Enemy.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 674, 98.5 )
@@ -41,9 +40,6 @@ shape = SubResource( 1 )
 
 [node name="Door" parent="." instance=ExtResource( 5 )]
 position = Vector2( 2071, 246 )
-
-[node name="Enemy" parent="." instance=ExtResource( 6 )]
-position = Vector2( 924, 263 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( -23, 295 )

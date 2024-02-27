@@ -314,4 +314,9 @@ move_speed = 30.0
 walk_node = NodePath("../Walk")
 idle_node = NodePath("../Idle")
 
+[node name="TaggedEffect" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="timeout" from="FireCooldown" to="StateDebugLabel/State_Manager/Shoot" method="_on_FireCooldown_timeout"]
+[connection signal="timeout" from="TaggedEffect" to="StateDebugLabel/State_Manager/Shoot" method="_on_TaggedEffect_timeout"]

@@ -26,9 +26,11 @@ func _process(_delta):
 			charge_Up()
 		if(Input.is_action_just_released("trigger")and bullet_instance==null):
 			fire()
-	if(Input.is_action_just_pressed("trigger")and bullet_instance):
-		if(bullet_instance.state!=0):
+	if Input.is_action_just_pressed("trigger"):
+		if bullet_instance:
 			teleport()
+		if player.tagged_enemy :
+			switch_place()
 	if(!chargin):
 		if(get_input()!=0):
 			return move_state
@@ -47,7 +49,6 @@ func _input(_event):
 func _on_FireCooldown_timeout():
 	bullet_force=0
 	can_shoot=true
-
 
 func exit():
 	player.block_movement=false
@@ -75,7 +76,6 @@ func fire():
 	player.fire_timer.start(5)
 
 func teleport():
-	player.emit_signal("tp",player.global_position)
 	player.global_position=bullet_instance.global_position
 	bullet_instance.queue_free()
 	bullet_instance=null
@@ -83,4 +83,13 @@ func teleport():
 
 func set_tagged():
 	player.tagged_enemy=!player.tagged_enemy
-	print(player.tagged_enemy)
+	player.tagged_timer.start()
+
+func switch_place():
+	player.emit_signal("tp",player.global_position)
+	set_tagged()
+
+
+func _on_TaggedEffect_timeout():
+	if player.tagged_enemy:
+		set_tagged()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Drone.png" type="Texture" id=1]
+[ext_resource path="res://Enemy.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -75,6 +76,7 @@ start_node = "Idle"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=10]
 
 [node name="Enemy" type="KinematicBody2D"]
+script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 32
@@ -100,3 +102,5 @@ tree_root = SubResource( 9 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 10 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

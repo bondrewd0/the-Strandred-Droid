@@ -17,15 +17,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 1021.0
-margin_bottom = 599.0
+margin_right = 1280.0
+margin_bottom = 720.0
 color = Color( 0.415686, 0.411765, 0.407843, 1 )
 
 [node name="Label" type="Label" parent="ColorRect"]
-margin_left = 294.0
-margin_top = 72.0
-margin_right = 712.0
-margin_bottom = 113.0
+margin_left = 434.0
+margin_top = 148.0
+margin_right = 852.0
+margin_bottom = 189.0
 custom_colors/font_color = Color( 1, 0.866667, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "The Strandred Droid"

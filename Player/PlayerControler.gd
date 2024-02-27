@@ -8,6 +8,7 @@ onready var anim= $AnimationTree.get('parameters/playback')
 onready var state= $StateDebugLabel/State_Manager
 onready var shootdir=$Position2D
 onready var fire_timer=$FireCooldown
+onready var tagged_timer=$TaggedEffect
 onready var player_sprt=$Sprite
 var velocity= Vector2.ZERO
 export var gravity:float
