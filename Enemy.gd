@@ -23,5 +23,3 @@ func _input(event):
 	if Input.is_action_just_pressed("trigger") and marked:
 		emit_signal("send_pos",self.global_position,self)
 
-func _new_pos(pos):
-	self.global_position=pos

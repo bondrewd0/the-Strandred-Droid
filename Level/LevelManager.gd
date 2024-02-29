@@ -21,22 +21,20 @@ func _on_Area2D_body_entered(_body):
 
 func player_signal(pos):
 	player_pos=pos
-	print(player_pos)
 	switch_pos(player_pos,tagged_pos,tagged_ref)
 
 func enemy_reciber(pos,enemy_node):
 	tagged_pos=pos
 	tagged_ref=enemy_node
-	print(enemy_node)
-	
+
 
 func switch_pos(pos1,pos2,enemy):
-	print(2)
+	
 	var aux=pos1
 	pos1=pos2
 	pos2=aux
-	player.global_position=pos2
-	enemy._new_pos(pos1)
+	player.global_position=pos1
+	enemy.global_position=pos2
 
 func _spawn_enemies():
 	var enemy_ins=enemy_path.instance()
