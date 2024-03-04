@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Drone.png" type="Texture" id=1]
 [ext_resource path="res://Enemy.gd" type="Script" id=2]
@@ -75,12 +75,20 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=10]
 
+[sub_resource type="RectangleShape2D" id=11]
+
 [node name="Enemy" type="KinematicBody2D"]
+collision_layer = 32
+collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 32
-collision_mask = 15
+collision_mask = 7
+gravity_vec = Vector2( 0, 0 )
+gravity = 0.0
+linear_damp = 0.0
+angular_damp = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
@@ -92,15 +100,28 @@ hframes = 16
 vframes = 6
 frame = 48
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite")
 anims/Idle = SubResource( 4 )
 anims/Move = SubResource( 2 )
 anims/RESET = SubResource( 3 )
 
-[node name="AnimationTree" type="AnimationTree" parent="Sprite"]
+[node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 9 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 10 )
 
+[node name="Forward" type="Tween" parent="."]
+
+[node name="Switch_tween" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 11 )
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="tween_completed" from="Forward" to="." method="_on_Forward_tween_completed"]
+[connection signal="tween_step" from="Forward" to="." method="_on_Forward_tween_step"]
+[connection signal="timeout" from="Switch_tween" to="." method="_on_Switch_tween_timeout"]

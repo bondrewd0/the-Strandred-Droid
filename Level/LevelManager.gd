@@ -38,10 +38,9 @@ func switch_pos(pos1,pos2,enemy):
 
 func _spawn_enemies():
 	var enemy_ins=enemy_path.instance()
-	enemy_ins.position=Vector2(924,263)
+	enemy_ins.position=Vector2(200,260)
+	enemy_ins.distance=50
+	enemy_ins.movement_speed=1
 	enemy_ins.connect("send_pos",self,"enemy_reciber")
 	add_child(enemy_ins)
-	var enemy_ins2=enemy_path.instance()
-	enemy_ins2.position=Vector2(900,263)
-	enemy_ins2.connect("send_pos",self,"enemy_reciber")
-	add_child(enemy_ins2)
+
