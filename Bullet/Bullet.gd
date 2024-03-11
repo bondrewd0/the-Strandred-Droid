@@ -26,7 +26,7 @@ func _on_Despawner_timeout():
 	_destroy()
 
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	_destroy()
 
 func _destroy():
