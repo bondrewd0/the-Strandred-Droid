@@ -13,11 +13,18 @@ onready var charging_state:BaseState= get_node(charge_node)
 onready var jump_state: BaseState=get_node(jump_node)
 onready var fall_state: BaseState = get_node(fall_node)
 
+var inertia=100
+
 func _process(_delta):
-	if(!player.is_on_floor()):
+	if(!player.on_floor):
 		return fall_state
 	var move=get_input()
-	
+	for index in player.get_slide_count():
+		var collision=player.get_slide_collision(index)
+		if collision.collider.is_in_group("MovableProps"):
+			print(collision.collider)
+			collision.collider.apply_central_impulse(-collision.normal*inertia)
+		pass
 	if move >0:
 		player.player_sprt.flip_h=false
 		player.shootdir.position.x=20
@@ -27,7 +34,7 @@ func _process(_delta):
 	player.velocity.y+=player.gravity
 	player.velocity.x= move*move_speed
 	if(!player.block_movement):
-		player.velocity = player.move_and_slide(player.velocity,Vector2.UP)
+		player.velocity = player.move_and_slide(player.velocity,Vector2.UP,false,4,PI/4,false)
 	
 	if move==0:
 		

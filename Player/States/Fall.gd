@@ -21,7 +21,7 @@ func _process(_delta):
 	player.velocity.x= move*move_speed
 	if(!player.block_movement):
 		player.velocity = player.move_and_slide(player.velocity,Vector2.UP)
-	if(player.is_on_floor()):
+	if player.on_floor:
 		
 		if move!=0:
 			

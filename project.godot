@@ -46,6 +46,8 @@ config/icon="res://icon.png"
 
 window/size/width=1280
 window/size/height=720
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
 
 [gdnative]
 
@@ -90,6 +92,7 @@ Jump={
 2d_physics/layer_4="DeathZone"
 2d_physics/layer_5="Interactible"
 2d_physics/layer_6="Enemy"
+2d_physics/layer_7="Props"
 
 [physics]
 

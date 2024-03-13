@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Player/States/IdleState.gd" type="Script" id=1]
 [ext_resource path="res://Player/States/Jump.gd" type="Script" id=2]
@@ -212,12 +212,15 @@ graph_offset = Vector2( -450.579, 18.02 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=38]
 
+[sub_resource type="RayShape2D" id=50]
+length = 5.0
+
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 28
 script = ExtResource( 3 )
-gravity = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
 shape = SubResource( 39 )
 
 [node name="Position2D" type="Position2D" parent="."]
@@ -302,7 +305,7 @@ fall_node = NodePath("../Fall")
 [node name="Jump" type="Node" parent="StateDebugLabel/State_Manager"]
 script = ExtResource( 2 )
 anim_name = "JumpStart"
-jump_force = 200.0
+jump_force = 150.0
 move_speed = 50.0
 fall_node = NodePath("../Fall")
 charge_node = NodePath("../Shoot")
@@ -310,7 +313,7 @@ charge_node = NodePath("../Shoot")
 [node name="Fall" type="Node" parent="StateDebugLabel/State_Manager"]
 script = ExtResource( 8 )
 anim_name = "Fall"
-move_speed = 30.0
+move_speed = 50.0
 walk_node = NodePath("../Walk")
 idle_node = NodePath("../Idle")
 
@@ -318,5 +321,14 @@ idle_node = NodePath("../Idle")
 wait_time = 2.0
 one_shot = true
 
+[node name="FloorDetection" type="Area2D" parent="."]
+collision_mask = 68
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorDetection"]
+position = Vector2( 0, 20 )
+shape = SubResource( 50 )
+
 [connection signal="timeout" from="FireCooldown" to="StateDebugLabel/State_Manager/Shoot" method="_on_FireCooldown_timeout"]
 [connection signal="timeout" from="TaggedEffect" to="StateDebugLabel/State_Manager/Shoot" method="_on_TaggedEffect_timeout"]
+[connection signal="body_entered" from="FloorDetection" to="." method="_on_FloorDetection_body_entered"]
+[connection signal="body_exited" from="FloorDetection" to="." method="_on_FloorDetection_body_exited"]

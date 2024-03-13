@@ -26,7 +26,7 @@ func _process(_delta):
 	player.velocity.y+=player.gravity
 	player.velocity.x= move*move_speed
 	if(!player.block_movement):
-		player.velocity = player.move_and_slide(player.velocity,Vector2.UP)
+		player.velocity = player.move_and_slide(player.velocity,Vector2.UP,false,4,PI/4,false)
 	if(player.velocity.y>0):
 		return fall_state
 	return null
