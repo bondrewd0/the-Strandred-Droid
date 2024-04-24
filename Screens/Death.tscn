@@ -14,11 +14,15 @@ font_data = ExtResource( 1 )
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = -441.0
+margin_bottom = -154.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 1023.0
-margin_bottom = 599.0
-color = Color( 0.431373, 0, 0, 0.74902 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 2248.0
+margin_bottom = 1356.0
+color = Color( 0.396078, 0.0117647, 0.0117647, 1 )
 
 [node name="Panel" type="Panel" parent="ColorRect"]
 margin_left = 337.0

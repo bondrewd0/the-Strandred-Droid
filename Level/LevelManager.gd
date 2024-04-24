@@ -17,7 +17,7 @@ func _on_DeathZone_death():
 
 
 func _on_Area2D_body_entered(_body):
-	print(_body.get_collision_layer())
+	pass
 
 func player_signal(pos):
 	player_pos=pos
@@ -28,13 +28,13 @@ func enemy_reciber(pos,enemy_node):
 	tagged_ref=enemy_node
 
 
-func switch_pos(pos1,pos2,enemy):
-	
+func switch_pos(pos1,pos2,object):
+	print(1)
 	var aux=pos1
 	pos1=pos2
 	pos2=aux
 	player.global_position=pos1
-	enemy.global_position=pos2
+	object.global_position=pos2
 
 func _spawn_enemies():
 	var enemy_ins=enemy_path.instance()
@@ -44,3 +44,8 @@ func _spawn_enemies():
 	enemy_ins.connect("send_pos",self,"enemy_reciber")
 	add_child(enemy_ins)
 
+
+
+func _on_Box_send_pos(pos, id):
+	tagged_pos=pos
+	tagged_ref=id

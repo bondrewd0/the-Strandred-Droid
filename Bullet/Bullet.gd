@@ -36,7 +36,7 @@ func _destroy():
 
 func _on_Area2D_area_entered(area):
 	var layer=area.get_collision_layer()
-	if layer==32:
+	if layer==32 or layer==64:
 		tagged_position= area.global_position
 		speed=0
 		global_position= tagged_position

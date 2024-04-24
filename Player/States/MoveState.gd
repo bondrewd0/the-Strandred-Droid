@@ -22,7 +22,6 @@ func _process(_delta):
 	for index in player.get_slide_count():
 		var collision=player.get_slide_collision(index)
 		if collision.collider.is_in_group("MovableProps"):
-			print(collision.collider)
 			collision.collider.apply_central_impulse(-collision.normal*inertia)
 		pass
 	if move >0:

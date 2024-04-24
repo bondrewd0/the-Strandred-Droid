@@ -1,9 +1,6 @@
 extends KinematicBody2D
 class_name Player
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 onready var anim= $AnimationTree.get('parameters/playback')
 onready var state= $StateDebugLabel/State_Manager
 onready var shootdir=$Position2D
@@ -15,7 +12,7 @@ onready var floor_detection = $FloorDetection
 var velocity= Vector2.ZERO
 export var gravity:float
 var block_movement:bool=false
-var tagged_enemy:bool=false
+var tagged_obj:bool=false
 signal tp(pos)
 var on_floor:bool
 # Called when the node enters the scene tree for the first time.

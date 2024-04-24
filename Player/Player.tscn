@@ -229,20 +229,6 @@ position = Vector2( 10, 0 )
 [node name="FireCooldown" type="Timer" parent="."]
 one_shot = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 0.6, 0.6 )
-limit_left = 0
-limit_top = 0
-limit_right = 2110
-limit_bottom = 600
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-drag_margin_left = 0.31
-drag_margin_right = 0.0
-editor_draw_limits = true
-editor_draw_drag_margin = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Death = SubResource( 10 )
 anims/Fall = SubResource( 45 )

@@ -29,7 +29,7 @@ func _process(_delta):
 	if Input.is_action_just_pressed("trigger"):
 		if bullet_instance:
 			teleport()
-		if player.tagged_enemy :
+		if player.tagged_obj :
 			switch_place()
 	if(!chargin):
 		if(get_input()!=0):
@@ -82,7 +82,7 @@ func teleport():
 	player.fire_timer.start(2)
 
 func set_tagged():
-	player.tagged_enemy=!player.tagged_enemy
+	player.tagged_obj=!player.tagged_obj
 	player.tagged_timer.start()
 
 func switch_place():
@@ -91,5 +91,5 @@ func switch_place():
 
 
 func _on_TaggedEffect_timeout():
-	if player.tagged_enemy:
+	if player.tagged_obj:
 		set_tagged()
